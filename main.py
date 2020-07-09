@@ -4,7 +4,7 @@ import random
 import warnings
 import logging
 from numpy.random import seed
-from tensorflow import set_random_seed
+from tensorflow.random import set_seed
 
 # import configs data and model
 from configs.pwml import config_TridentSegNet as ModelConfig
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Set random seed
     random.seed(config.RANDOM_SEED)
     seed(config.RANDOM_SEED)
-    set_random_seed(config.RANDOM_SEED)
+    set_seed(config.RANDOM_SEED)
 
     # config.display()
     print('Name:', config.NAME)

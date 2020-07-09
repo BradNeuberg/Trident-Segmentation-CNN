@@ -18,10 +18,10 @@ from frames.model import BaseModel
 def identity_block(input_tensor, strides):
     x = BatchNormalization()(input_tensor)
     x = Activation(activation='relu')(x)
-    x = Conv2D(filters=x.shape[3].value, kernel_size=(3, 3), padding='same', strides=strides[0])(x)
+    x = Conv2D(filters=x.shape[3], kernel_size=(3, 3), padding='same', strides=strides[0])(x)
     x = BatchNormalization()(x)
     x = Activation(activation='relu')(x)
-    x = Conv2D(filters=x.shape[3].value, kernel_size=(3, 3), padding='same', strides=strides[1])(x)
+    x = Conv2D(filters=x.shape[3], kernel_size=(3, 3), padding='same', strides=strides[1])(x)
 
     ide_path = Add()([x, input_tensor])
     return ide_path
@@ -61,10 +61,10 @@ def td_res_block(x, nb_filters, strides):
 def td_identity_block(inputs, strides):
     x = TimeDistributed(BatchNormalization())(inputs)
     x = Activation(activation='relu')(x)
-    x = TimeDistributed(Conv2D(x.shape[-1].value, (3, 3), strides=strides[0], padding='same'))(x)
+    x = TimeDistributed(Conv2D(x.shape[-1], (3, 3), strides=strides[0], padding='same'))(x)
     x = TimeDistributed(BatchNormalization())(x)
     x = Activation(activation='relu')(x)
-    x = TimeDistributed(Conv2D(x.shape[-1].value, (3, 3), strides=strides[1], padding='same'))(x)
+    x = TimeDistributed(Conv2D(x.shape[-1], (3, 3), strides=strides[1], padding='same'))(x)
 
     ide_path = Add()([inputs, x])
     return ide_path
@@ -104,6 +104,9 @@ def trident_graph(inputs, k):
 
 class DefineModel(BaseModel):
     def build(self):
+        from IPython.core.debugger import set_trace
+        set_trace()
+
         # Build model
         k = self.config.CARDINALITY
         inputs = Input(shape=(3, self.config.PATCH_SIZE[0], self.config.PATCH_SIZE[1], 1), name='inputs',

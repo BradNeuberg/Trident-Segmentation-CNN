@@ -1,4 +1,6 @@
 # coding: utf-8
+import os
+
 import numpy as np
 from frames.config import Config
 from imgaug import augmenters as iaa
@@ -12,9 +14,9 @@ from frames.metrics import mean_iou, dice_coef_metrics, self_balancing_focal_los
 ############################################################
 class ModelConfig(Config):
     # Modify to your own path
-    DATA_DIR = './test_data/cut2skull'  # choose input data
+    DATA_DIR = os.path.expanduser('~/Trident-Segmentation-CNN/test_data/cut2skull')  # choose input data
     # WEIGHTS_PATH = ''  # If Weight path ='', then train from scratch
-    WEIGHTS_PATH = './logs/tridentsegnet.h5'  # Train/Inference from weights
+    WEIGHTS_PATH = os.path.expanduser('~/Trident-Segmentation-CNN/logs/tridentsegnet.h5')  # Train/Inference from weights
 
     ###################################################################################################################
     #                         Modifications to the following section are NOT recommended!                             #
